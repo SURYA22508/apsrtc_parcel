@@ -32,6 +32,28 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 def load_global_css():
     st.markdown("""
     <style>
+   /* ------- input box --------*/
+    /* Input box container */
+    div[data-baseweb="input"] > div {
+        background-color: #1E1E2F !important;  /* Background */
+        border: 2px solid #4CAF50 !important;  /* Border */
+        border-radius: 8px;
+    }
+
+    /* Input text */
+    div[data-baseweb="input"] input {
+        color: #FFFFFF !important;  /* Text color */
+    }
+
+    /* Placeholder text */
+    div[data-baseweb="input"] input::placeholder {
+        color: #BBBBBB !important;
+    }
+
+    /* Focus effect */
+    div[data-baseweb="input"] > div:focus-within {
+        border: 2px solid #FF9800 !important;
+    }
 
     /* -------- GLOBAL BACKGROUND -------- */
     .stApp {
