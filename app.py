@@ -35,24 +35,24 @@ def load_global_css():
    /* ------- input box --------*/
     /* Input box container */
     div[data-baseweb="input"] > div {
-        background-color: #1E1E2F !important;  /* Background */
-        border: 2px solid #4CAF50 !important;  /* Border */
+        background-color: #FFFFFF !important;  /* White background */
+        border: 2px solid #1E5AA8 !important;  /* Blue border */
         border-radius: 8px;
     }
 
     /* Input text */
     div[data-baseweb="input"] input {
-        color: #FFFFFF !important;  /* Text color */
+        color: #000000 !important;  /* Black text */
     }
 
     /* Placeholder text */
     div[data-baseweb="input"] input::placeholder {
-        color: #BBBBBB !important;
+        color: #666666 !important;  /* Slight gray */
     }
 
     /* Focus effect */
     div[data-baseweb="input"] > div:focus-within {
-        border: 2px solid #FF9800 !important;
+        border: 2px solid #0D3C84 !important;  /* Darker blue on click */
     }
 
     /* -------- GLOBAL BACKGROUND -------- */
