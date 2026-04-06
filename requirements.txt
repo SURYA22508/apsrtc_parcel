@@ -1,7 +1,8 @@
 streamlit
-supabase
-python-dotenv
 pandas
 requests
+supabase
+python-dotenv
 python-barcode
 pillow
+networkx
