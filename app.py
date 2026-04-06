@@ -146,8 +146,71 @@ def load_global_css():
     h1, h2, h3, h4 {
         color: #0B3D91;
     }
+    /* -------- FORM SUBMIT BUTTON (LOGIN) -------- */
+    div[data-testid="stForm"] button[kind="primary"] {
+        background-color: #1E4FA1 !important;
+        color: #FFFFFF !important;
+        border-radius: 8px !important;
+        border: none !important;
+        padding: 10px 22px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
     
-
+    /* Hover */
+    div[data-testid="stForm"] button[kind="primary"]:hover {
+        background-color: #163E82 !important;
+        transform: translateY(-1px);
+    }
+    
+    /* Click effect */
+    div[data-testid="stForm"] button[kind="primary"]:active {
+        transform: scale(0.97);
+    }
+    div[data-testid="stForm"] {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    /* -------- TEXT INPUT (USERNAME / PASSWORD) -------- */
+    div[data-testid="stForm"] div[data-baseweb="input"] > div {
+        background-color: #F1F3F6 !important;
+        border: 1px solid #D0D7E2 !important;
+        border-radius: 8px !important;
+        padding: 6px 10px;
+        transition: all 0.3s ease;
+    }
+    
+    /* Input text */
+    div[data-testid="stForm"] div[data-baseweb="input"] input {
+        color: #1A1A1A !important;
+        font-size: 14px !important;
+    }
+    
+    /* Placeholder */
+    div[data-testid="stForm"] div[data-baseweb="input"] input::placeholder {
+        color: #9AA5B1 !important;
+    }
+    
+    /* Focus effect */
+    div[data-testid="stForm"] div[data-baseweb="input"] > div:focus-within {
+        border: 1px solid #1E4FA1 !important;
+        background-color: #FFFFFF !important;
+        box-shadow: 0 0 6px rgba(30, 79, 161, 0.25);
+    }
+    
+    /* Password eye icon */
+    div[data-testid="stForm"] svg {
+        color: #1E4FA1 !important;
+    }
+    /* Label spacing */
+    label {
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        margin-bottom: 4px !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
