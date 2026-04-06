@@ -552,32 +552,46 @@ def order_page():
             st.markdown("""
             <style>
             
-            /* ---------- SELECTBOX ---------- */
+            /* Main select box */
             div[data-baseweb="select"] > div {
-                background-color: #FFFFFF !important;   /* White */
-                border: 2px solid #1E5AA8 !important;   /* Blue border */
+                background-color: #FFFFFF !important;
+                border: 2px solid #1E5AA8 !important;
                 border-radius: 8px;
-                color: #1A1A1A !important;              /* Text */
+                color: #1A1A1A !important;
             }
             
-            /* Selected value */
+            /* Selected text */
             div[data-baseweb="select"] span {
                 color: #1A1A1A !important;
+            }
+            
+            /* Dropdown container (IMPORTANT FIX) */
+            div[data-baseweb="popover"] {
+                opacity: 1 !important;
             }
             
             /* Dropdown menu */
             ul[role="listbox"] {
                 background-color: #FFFFFF !important;
+                opacity: 1 !important;
             }
             
-            /* Options */
+            /* Each option */
             ul[role="listbox"] li {
                 color: #1A1A1A !important;
+                background-color: #FFFFFF !important;
+                opacity: 1 !important;
             }
             
             /* Hover option */
             ul[role="listbox"] li:hover {
-                background-color: #E6F0FA !important;   /* Light blue */
+                background-color: #E6F0FA !important;
+                color: #1A1A1A !important;
+            }
+            
+            /* Selected option */
+            ul[role="listbox"] li[aria-selected="true"] {
+                background-color: #D0E2FF !important;
                 color: #1A1A1A !important;
             }
             
