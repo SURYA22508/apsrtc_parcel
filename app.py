@@ -30,6 +30,29 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 # ✅ ADD THIS HERE
 def load_global_css():
+        
+    st.markdown("""
+    <style>
+    
+    /* Input box container */
+    div[data-baseweb="input"] > div {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    /* Input text */
+    div[data-baseweb="input"] input {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    /* Focus effect */
+    div[data-baseweb="input"] > div:focus-within {
+        border: 2px solid #4169E1 !important;
+    }
+    
+    </style>
+    """, unsafe_allow_html=True)
     st.markdown("""
     <style>
 
@@ -81,8 +104,8 @@ def load_global_css():
 
     /* -------- BUTTON -------- */
     .stButton > button {
-        background-color: #0B3D91;
-        color: #FFFFFF;
+        background-color: #FFFFFF;
+        color:  #4169E1;
         border-radius: 8px;
         border: none;
         font-weight: 500;
