@@ -552,7 +552,7 @@ def order_page():
             st.markdown("""
             <style>
             
-            /* Main select box */
+            /* ---------- SELECT BOX ---------- */
             div[data-baseweb="select"] > div {
                 background-color: #FFFFFF !important;
                 border: 2px solid #1E5AA8 !important;
@@ -560,43 +560,52 @@ def order_page():
                 color: #1A1A1A !important;
             }
             
-            /* Selected text */
+            /* Selected value */
             div[data-baseweb="select"] span {
                 color: #1A1A1A !important;
             }
             
-            /* Dropdown container (IMPORTANT FIX) */
-            div[data-baseweb="popover"] {
-                opacity: 1 !important;
-            }
-            
-            /* Dropdown menu */
+            /* ---------- REMOVE FADED EFFECT ---------- */
+            div[data-baseweb="popover"],
+            div[data-baseweb="menu"],
             ul[role="listbox"] {
-                background-color: #FFFFFF !important;
                 opacity: 1 !important;
+                background-color: #FFFFFF !important;
+                filter: none !important;
+                backdrop-filter: none !important;
             }
             
-            /* Each option */
+            /* ---------- OPTIONS ---------- */
             ul[role="listbox"] li {
                 color: #1A1A1A !important;
                 background-color: #FFFFFF !important;
-                opacity: 1 !important;
             }
             
-            /* Hover option */
+            /* Hover */
             ul[role="listbox"] li:hover {
                 background-color: #E6F0FA !important;
                 color: #1A1A1A !important;
             }
             
-            /* Selected option */
+            /* Selected */
             ul[role="listbox"] li[aria-selected="true"] {
                 background-color: #D0E2FF !important;
                 color: #1A1A1A !important;
             }
             
+            /* ---------- FIX DIM OVERLAY (IMPORTANT) ---------- */
+            body > div {
+                opacity: 1 !important;
+            }
+            
+            /* Remove any gray overlay layer */
+            div[style*="opacity"] {
+                opacity: 1 !important;
+            }
+            
             </style>
             """, unsafe_allow_html=True)
+
             source_place = st.selectbox("Source",place_names)
             destination_place = st.selectbox("Destination",place_names)
 
