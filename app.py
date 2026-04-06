@@ -175,36 +175,77 @@ def load_global_css():
         align-items: flex-start;
     }
     /* -------- TEXT INPUT (USERNAME / PASSWORD) -------- */
-    div[data-testid="stForm"] div[data-baseweb="input"] > div {
-        background-color: #F1F3F6 !important;
-        border: 1px solid #D0D7E2 !important;
-        border-radius: 8px !important;
-        padding: 6px 10px;
-        transition: all 0.3s ease;
-    }
-    
-    /* Input text */
-    div[data-testid="stForm"] div[data-baseweb="input"] input {
-        color: #1A1A1A !important;
-        font-size: 14px !important;
-    }
-    
-    /* Placeholder */
-    div[data-testid="stForm"] div[data-baseweb="input"] input::placeholder {
-        color: #9AA5B1 !important;
-    }
-    
-    /* Focus effect */
-    div[data-testid="stForm"] div[data-baseweb="input"] > div:focus-within {
-        border: 1px solid #1E4FA1 !important;
-        background-color: #FFFFFF !important;
-        box-shadow: 0 0 6px rgba(30, 79, 161, 0.25);
-    }
-    
-    /* Password eye icon */
-    div[data-testid="stForm"] svg {
-        color: #1E4FA1 !important;
-    }
+    /* -------- LOGIN FORM CONTAINER -------- */
+div[data-testid="stForm"] {
+    width: 360px;
+    margin: auto;
+    margin-top: 80px;
+    background-color: #FFFFFF;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.12);
+    border: 1px solid #E0E6ED;
+}
+
+/* -------- FORM TITLE -------- */
+div[data-testid="stForm"] h1 {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+}
+
+/* -------- INPUT FIELD -------- */
+div[data-testid="stForm"] div[data-baseweb="input"] > div {
+    background-color: #EEF1F5 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+}
+
+/* Input text */
+div[data-testid="stForm"] input {
+    color: #1A1A1A !important;
+    font-size: 14px !important;
+}
+
+/* Focus effect */
+div[data-testid="stForm"] div[data-baseweb="input"] > div:focus-within {
+    background-color: #FFFFFF !important;
+    border: 1px solid #1E4FA1 !important;
+    box-shadow: 0 0 5px rgba(30,79,161,0.3);
+}
+
+/* -------- LABEL -------- */
+div[data-testid="stForm"] label {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    margin-bottom: 4px !important;
+}
+
+/* -------- LOGIN BUTTON -------- */
+div[data-testid="stForm"] button[kind="primary"] {
+    background-color: #1E4FA1 !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
+    border: none !important;
+    padding: 8px 20px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-top: 10px;
+}
+
+/* Hover */
+div[data-testid="stForm"] button[kind="primary"]:hover {
+    background-color: #163E82 !important;
+}
+
+/* Align button left like your image */
+div[data-testid="stForm"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
     /* Label spacing */
     label {
         font-size: 13px !important;
