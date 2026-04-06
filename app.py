@@ -152,7 +152,7 @@ def load_global_css():
     """, unsafe_allow_html=True)
 
 load_global_css()
-
+st.write(os.listdir())
 
 
 supabase = None
