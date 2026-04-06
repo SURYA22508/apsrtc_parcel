@@ -548,7 +548,41 @@ def order_page():
 
             customer_name = st.text_input("Customer Name")
             customer_phone = st.text_input("Customer Phone")
-
+            
+            st.markdown("""
+            <style>
+            
+            /* ---------- SELECTBOX ---------- */
+            div[data-baseweb="select"] > div {
+                background-color: #FFFFFF !important;   /* White */
+                border: 2px solid #1E5AA8 !important;   /* Blue border */
+                border-radius: 8px;
+                color: #1A1A1A !important;              /* Text */
+            }
+            
+            /* Selected value */
+            div[data-baseweb="select"] span {
+                color: #1A1A1A !important;
+            }
+            
+            /* Dropdown menu */
+            ul[role="listbox"] {
+                background-color: #FFFFFF !important;
+            }
+            
+            /* Options */
+            ul[role="listbox"] li {
+                color: #1A1A1A !important;
+            }
+            
+            /* Hover option */
+            ul[role="listbox"] li:hover {
+                background-color: #E6F0FA !important;   /* Light blue */
+                color: #1A1A1A !important;
+            }
+            
+            </style>
+            """, unsafe_allow_html=True)
             source_place = st.selectbox("Source",place_names)
             destination_place = st.selectbox("Destination",place_names)
 
