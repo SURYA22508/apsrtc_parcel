@@ -102,7 +102,7 @@ def load_global_css():
     /* -------- SELECTBOX -------- */
     div[data-baseweb="select"] > div {
         background-color: #1E5AA8 !important;
-        color: #FFFFFF !important;
+        color: #000000 !important;
         border-radius: 8px;
     }
 
