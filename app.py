@@ -33,9 +33,65 @@ def load_global_css():
     st.markdown("""
     <style>
 
-    /* -------- PAGE BACKGROUND -------- */
-    body {
-        background-color: #EDEFF3;
+    /* -------- GLOBAL BACKGROUND -------- */
+    .stApp {
+        background-color: #F4F6F9;
+        color: #1A1A1A;
+    }
+
+    header {visibility:hidden;}
+
+    /* -------- LAYOUT SPACING -------- */
+    .block-container {
+        padding-top: 70px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    /* -------- SIDEBAR -------- */
+    [data-testid="stSidebar"] {
+        position: fixed;
+        top: 60px;
+        width: 260px;
+        height: calc(100vh - 60px);
+        background: #1E5AA8;
+        border-right: 2px solid #0B3D91;
+    }
+
+    section.main > div {
+        margin-left: 260px;
+        margin-top: 60px;
+    }
+
+    [data-testid="stSidebar"] * {
+        color: #FFFFFF;
+    }
+
+    /* -------- SELECTBOX -------- */
+    div[data-baseweb="select"] > div {
+        background-color: #1E5AA8 !important;
+        color: #FFFFFF !important;
+        border-radius: 8px;
+    }
+
+    ul {
+        background-color: #FFFFFF !important;
+        color: #1A1A1A !important;
+    }
+
+    /* -------- BUTTON -------- */
+    .stButton > button {
+        background-color: #0B3D91;
+        color: #FFFFFF;
+        border-radius: 8px;
+        border: none;
+        font-weight: 500;
+    }
+
+    .stButton > button:hover {
+        transition: background-color 0.4s;
+        background-color:  #4169E1;
+        color: #FFFFFF;
     }
 
     /* -------- NAVBAR -------- */
@@ -45,109 +101,56 @@ def load_global_css():
         left: 0;
         width: 100%;
         height: 60px;
-        background: #1F4E99;
+        background: #0B3D91;
         display: flex;
         align-items: center;
-        padding: 0 20px;
+        padding: 0px 30px;
         z-index: 1000;
+        box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
     }
 
     .logo img {
-        width: 38px;
+        width: 42px;
         margin-right: 10px;
     }
 
     .logo-text {
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
     }
 
-    /* -------- SIDEBAR -------- */
-    section[data-testid="stSidebar"] {
-        background-color: #2E5FA4;
-        width: 220px !important;
+    /* -------- FORM / CARD -------- */
+    div[data-testid="stForm"] {
+        background-color: #FFFFFF;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
     }
 
-    section[data-testid="stSidebar"] * {
-        color: white;
-    }
-
-    /* MENU TEXT */
-    .menu-title {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 20px;
-        opacity: 0.9;
-    }
-
-    /* SIDEBAR BUTTONS */
-    .sidebar-btn {
-        background-color: #1F4E99;
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-        margin-bottom: 12px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .sidebar-btn:hover {
-        background-color: #173B75;
-    }
-
-    /* -------- MAIN AREA -------- */
-    .main {
-        margin-top: 80px;
-        display: flex;
-        justify-content: center;
-    }
-
-    /* -------- LOGIN CARD -------- */
-    .login-card {
+    /* -------- GENERAL CARD -------- */
+    .card {
         background: #FFFFFF;
-        padding: 30px;
+        border-left: 5px solid #2E8B57;
+        padding: 15px;
         border-radius: 10px;
-        width: 350px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-    }
-
-    /* -------- INPUT -------- */
-    div[data-baseweb="input"] > div {
-        background-color: #F1F3F6 !important;
-        border: none !important;
-        border-radius: 6px !important;
-    }
-
-    div[data-baseweb="input"] input {
-        color: black !important;
-    }
-
-    /* -------- BUTTON -------- */
-    .stButton > button {
-        background-color: #1F4E99;
-        color: white;
-        border-radius: 6px;
-        border: none;
-        padding: 8px 18px;
-        font-weight: 500;
-    }
-
-    .stButton > button:hover {
-        background-color: #173B75;
+        color: #1A1A1A;
     }
 
     /* -------- HEADINGS -------- */
-    h2 {
-        color: #1F4E99;
-        text-align: center;
-        font-weight: 700;
-        margin-bottom: 20px;
+    h1, h2, h3, h4 {
+        color: #0B3D91;
     }
+    
 
     </style>
     """, unsafe_allow_html=True)
+
 
 load_global_css()
 
