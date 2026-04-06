@@ -30,91 +30,12 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 # ✅ ADD THIS HERE
 def load_global_css():
-        
-    st.markdown("""
-    <style>
-    
-    /* Input box container */
-    div[data-baseweb="input"] > div {
-        background-color: white !important;
-        color: black !important;
-    }
-    
-    /* Input text */
-    div[data-baseweb="input"] input {
-        background-color: white !important;
-        color: black !important;
-    }
-    
-    /* Focus effect */
-    div[data-baseweb="input"] > div:focus-within {
-        border: 2px solid #4169E1 !important;
-    }
-    
-    </style>
-    """, unsafe_allow_html=True)
     st.markdown("""
     <style>
 
-    /* -------- GLOBAL BACKGROUND -------- */
-    .stApp {
-        background-color: #F4F6F9;
-        color: #1A1A1A;
-    }
-
-    header {visibility:hidden;}
-
-    /* -------- LAYOUT SPACING -------- */
-    .block-container {
-        padding-top: 70px;
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-
-    /* -------- SIDEBAR -------- */
-    [data-testid="stSidebar"] {
-        position: fixed;
-        top: 60px;
-        width: 260px;
-        height: calc(100vh - 60px);
-        background: #1E5AA8;
-        border-right: 2px solid #0B3D91;
-    }
-
-    section.main > div {
-        margin-left: 260px;
-        margin-top: 60px;
-    }
-
-    [data-testid="stSidebar"] * {
-        color: #FFFFFF;
-    }
-
-    /* -------- SELECTBOX -------- */
-    div[data-baseweb="select"] > div {
-        background-color: #1E5AA8 !important;
-        color: #FFFFFF !important;
-        border-radius: 8px;
-    }
-
-    ul {
-        background-color: #FFFFFF !important;
-        color: #1A1A1A !important;
-    }
-
-    /* -------- BUTTON -------- */
-    .stButton > button {
-        background-color: #FFFFFF;
-        color:  #4169E1;
-        border-radius: 8px;
-        border: none;
-        font-weight: 500;
-    }
-
-    .stButton > button:hover {
-        transition: background-color 0.4s;
-        background-color:  #4169E1;
-        color: #FFFFFF;
+    /* -------- PAGE BACKGROUND -------- */
+    body {
+        background-color: #EDEFF3;
     }
 
     /* -------- NAVBAR -------- */
@@ -124,58 +45,111 @@ def load_global_css():
         left: 0;
         width: 100%;
         height: 60px;
-        background: #0B3D91;
+        background: #1F4E99;
         display: flex;
         align-items: center;
-        padding: 0px 30px;
+        padding: 0 20px;
         z-index: 1000;
-        box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
-    }
-
-    .logo {
-        display: flex;
-        align-items: center;
     }
 
     .logo img {
-        width: 42px;
+        width: 38px;
         margin-right: 10px;
     }
 
     .logo-text {
-        color: #FFFFFF;
-        font-size: 20px;
-        font-weight: bold;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
     }
 
-    /* -------- FORM / CARD -------- */
-    div[data-testid="stForm"] {
-        background-color: #FFFFFF;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+    /* -------- SIDEBAR -------- */
+    section[data-testid="stSidebar"] {
+        background-color: #2E5FA4;
+        width: 220px !important;
     }
 
-    /* -------- GENERAL CARD -------- */
-    .card {
+    section[data-testid="stSidebar"] * {
+        color: white;
+    }
+
+    /* MENU TEXT */
+    .menu-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        opacity: 0.9;
+    }
+
+    /* SIDEBAR BUTTONS */
+    .sidebar-btn {
+        background-color: #1F4E99;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .sidebar-btn:hover {
+        background-color: #173B75;
+    }
+
+    /* -------- MAIN AREA -------- */
+    .main {
+        margin-top: 80px;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* -------- LOGIN CARD -------- */
+    .login-card {
         background: #FFFFFF;
-        border-left: 5px solid #2E8B57;
-        padding: 15px;
+        padding: 30px;
         border-radius: 10px;
-        color: #1A1A1A;
+        width: 350px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* -------- INPUT -------- */
+    div[data-baseweb="input"] > div {
+        background-color: #F1F3F6 !important;
+        border: none !important;
+        border-radius: 6px !important;
+    }
+
+    div[data-baseweb="input"] input {
+        color: black !important;
+    }
+
+    /* -------- BUTTON -------- */
+    .stButton > button {
+        background-color: #1F4E99;
+        color: white;
+        border-radius: 6px;
+        border: none;
+        padding: 8px 18px;
+        font-weight: 500;
+    }
+
+    .stButton > button:hover {
+        background-color: #173B75;
     }
 
     /* -------- HEADINGS -------- */
-    h1, h2, h3, h4 {
-        color: #0B3D91;
+    h2 {
+        color: #1F4E99;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 20px;
     }
-    
 
     </style>
     """, unsafe_allow_html=True)
 
 load_global_css()
-st.write(os.listdir())
 
 
 supabase = None
