@@ -178,7 +178,29 @@ def load_global_css():
     h1, h2, h3, h4 {
         color: #0B3D91;
     }
-    
+    /* Form submit button */
+    div[data-testid="stFormSubmitButton"] button {
+        background-color: #FFFFFF !important;  /* White background */
+        color: #000000 !important;            /* Black text */
+        border: 2px solid #1E5AA8 !important; /* Blue border */
+        border-radius: 8px;
+        padding: 8px 20px;
+        font-weight: 600;
+    }
+
+    /* Hover effect */
+    div[data-testid="stFormSubmitButton"] button:hover {
+        background-color: #1E5AA8 !important; /* Blue background */
+        color: #FFFFFF !important;            /* White text */
+    }
+
+    /* Click (active) effect */
+    div[data-testid="stFormSubmitButton"] button:active {
+        background-color: #0D3C84 !important; /* Darker blue */
+        color: #FFFFFF !important;
+    }
+
+
 
     </style>
     """, unsafe_allow_html=True)
@@ -295,8 +317,7 @@ def order_page():
     
     </div>
 
-    </div>
-    """, unsafe_allow_html=True)
+    </div>""", unsafe_allow_html=True)
 
     # -------------------------------
     # Load Environment
@@ -1477,6 +1498,32 @@ def login_page():
 
             username = st.text_input("Username")
             password = st.text_input("Password", type="password")
+            st.markdown("""
+                <style>
+                /* Form submit button */
+                div[data-testid="stFormSubmitButton"] button {
+                    background-color: #FFFFFF !important;  /* White background */
+                    color: #000000 !important;            /* Black text */
+                    border: 2px solid #1E5AA8 !important; /* Blue border */
+                    border-radius: 8px;
+                    padding: 8px 20px;
+                    font-weight: 600;
+                }
+            
+                /* Hover effect */
+                div[data-testid="stFormSubmitButton"] button:hover {
+                    background-color: #1E5AA8 !important; /* Blue background */
+                    color: #FFFFFF !important;            /* White text */
+                }
+            
+                /* Click (active) effect */
+                div[data-testid="stFormSubmitButton"] button:active {
+                    background-color: #0D3C84 !important; /* Darker blue */
+                    color: #FFFFFF !important;
+                }
+                </style>
+            """, unsafe_allow_html=True)
+
             submit = st.form_submit_button("Login")
 
             if submit:
