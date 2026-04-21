@@ -650,13 +650,15 @@ def order_page():
         # API CALL (ONLY ONCE)
         if st.session_state.routes_data is None:
             with st.spinner("Loading routes..."):
-
+                now = datetime.now()
                 try:
                     response = requests.get(
                         url,
                         params={
                             "source": order["source_id"],
-                            "target": order["destination_id"]
+                            "target": order["destination_id"],
+                            "hour": now.hour,
+                            "minute": now.minute
                         }
                     )
 
