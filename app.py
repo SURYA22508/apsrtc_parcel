@@ -19,6 +19,8 @@ import barcode
 from barcode.writer import ImageWriter
 
 from dotenv import load_dotenv 
+import os
+
 load_dotenv()
 # -------------------------------
 # CONFIG
@@ -32,43 +34,11 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 def load_global_css():
     st.markdown("""
     <style>
-   /* ------- input box --------*/
-    /* Input box container */
-    div[data-baseweb="input"] > div {
-        background-color: #FFFFFF !important;  /* White background */
-        border: 2px solid #1E5AA8 !important;  /* Blue border */
-        border-radius: 8px;
-    }
-
-    /* Input text */
-    div[data-baseweb="input"] input {
-        color: #000000 !important;  /* Black text */
-    }
-
-    /* Placeholder text */
-    div[data-baseweb="input"] input::placeholder {
-        color: #666666 !important;  /* Slight gray */
-    }
-
-    /* Focus effect */
-    div[data-baseweb="input"] > div:focus-within {
-        border: 2px solid #0D3C84 !important;  /* Darker blue on click */
-    }
 
     /* -------- GLOBAL BACKGROUND -------- */
     .stApp {
-        background-color: #FFFFFF !important;
+        background-color: #F4F6F9;
         color: #1A1A1A;
-    }
-    
-    /* Remove default grey from main container */
-    .main {
-        background-color: #FFFFFF !important;
-    }
-    
-    /* Extra safety (Streamlit layers) */
-    section.main > div {
-        background-color: #FFFFFF !important;
     }
 
     header {visibility:hidden;}
@@ -108,7 +78,7 @@ def load_global_css():
 
     ul {
         background-color: #FFFFFF !important;
-        color: #1E5AA8 !important;
+        color: #1A1A1A !important;
     }
 
     /* -------- BUTTON -------- */
@@ -178,36 +148,73 @@ def load_global_css():
     h1, h2, h3, h4 {
         color: #0B3D91;
     }
-    /* Form submit button */
-    div[data-testid="stFormSubmitButton"] button {
-        background-color: #FFFFFF !important;  /* White background */
-        color: #000000 !important;            /* Black text */
-        border: 2px solid #1E5AA8 !important; /* Blue border */
-        border-radius: 8px;
-        padding: 8px 20px;
+
+    /* -------- ALL STREAMLIT BUTTONS -------- */
+    .stButton > button,
+    form button[kind="formSubmit"] {
+        background-color: #0B3D91;
+        color: #FFFFFF;
+        border-radius: 10px;
+        border: none;
         font-weight: 600;
+        padding: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    /* Hover */
+    .stButton > button:hover,
+    form button[kind="formSubmit"]:hover {
+        background-color: #4169E1;
+        color: #FFFFFF;
+        transform: scale(1.03);
+    }
+    
+    /* Click */
+    .stButton > button:active,
+    form button[kind="formSubmit"]:active {
+        transform: scale(0.97);
+    }
+    /* SUBMIT BUTTON */
+    form button[kind="formSubmit"] {
+        background-color: #0B3D91 !important;
+        color: white !important;
+        border-radius: 10px !important;
+        padding: 10px !important;
+    }
+    
+    /* HOVER */
+    form button[kind="formSubmit"]:hover {
+        background-color: #4169E1 !important;
     }
 
-    /* Hover effect */
-    div[data-testid="stFormSubmitButton"] button:hover {
-        background-color: #1E5AA8 !important; /* Blue background */
-        color: #FFFFFF !important;            /* White text */
+    /* -------- TEXT INPUT FIELD -------- */
+    input[type="text"], input[type="password"] {
+        border: 2px solid #0B3D91;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #F5F8FF;
+        color: #000000;
+        font-size: 16px;
     }
-
-    /* Click (active) effect */
-    div[data-testid="stFormSubmitButton"] button:active {
-        background-color: #0D3C84 !important; /* Darker blue */
-        color: #FFFFFF !important;
+    
+    /* Focus effect */
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: #4169E1;
+        outline: none;
+        box-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
     }
-
-
+    
+    /* Label styling */
+    label {
+        font-weight: 600;
+        color: #0B3D91;
+    }
 
     </style>
     """, unsafe_allow_html=True)
 
-
-
 load_global_css()
+
 
 
 supabase = None
@@ -317,7 +324,8 @@ def order_page():
     
     </div>
 
-    </div>""", unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
     # -------------------------------
     # Load Environment
@@ -336,11 +344,16 @@ def order_page():
         st.error("❌ data.csv not found")
         st.stop()
 
+
     try:
-        with open("apsrtc_main_graph.pkl","rb") as f:
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(BASE_DIR, "apsrtc_main_graph.pkl")
+    
+        with open(file_path, "rb") as f:
             g = pickle.load(f)
-    except:
-        st.error("❌ graph file missing")
+    
+    except Exception as e:
+        st.error(f"❌ Graph load error: {e}")
         st.stop()
 
     places_df = places_df[places_df["placeId"].isin(g.nodes)]
@@ -396,8 +409,8 @@ def order_page():
 
         path_html = ""
         if path:
-            stops = [leg["sourceName"] for leg in path]
-            stops.append(path[-1]["destinationName"])
+            stops = [leg["bus"]["sourceName"] for leg in path]
+            stops.append(path[-1]["bus"]["destinationName"])
             path_str = " ➝ ".join(stops)
             path_html = f"""
             <tr>
@@ -548,63 +561,6 @@ def order_page():
 
             customer_name = st.text_input("Customer Name")
             customer_phone = st.text_input("Customer Phone")
-            
-            st.markdown("""
-            <style>
-            
-            /* ---------- SELECT BOX ---------- */
-            div[data-baseweb="select"] > div {
-                background-color: #FFFFFF !important;
-                border: 2px solid #1E5AA8 !important;
-                border-radius: 8px;
-                color: #1A1A1A !important;
-            }
-            
-            /* Selected value */
-            div[data-baseweb="select"] span {
-                color: #1A1A1A !important;
-            }
-            
-            /* ---------- REMOVE FADED EFFECT ---------- */
-            div[data-baseweb="popover"],
-            div[data-baseweb="menu"],
-            ul[role="listbox"] {
-                opacity: 1 !important;
-                background-color: #FFFFFF !important;
-                filter: none !important;
-                backdrop-filter: none !important;
-            }
-            
-            /* ---------- OPTIONS ---------- */
-            ul[role="listbox"] li {
-                color: #1A1A1A !important;
-                background-color: #FFFFFF !important;
-            }
-            
-            /* Hover */
-            ul[role="listbox"] li:hover {
-                background-color: #E6F0FA !important;
-                color: #1A1A1A !important;
-            }
-            
-            /* Selected */
-            ul[role="listbox"] li[aria-selected="true"] {
-                background-color: #D0E2FF !important;
-                color: #1A1A1A !important;
-            }
-            
-            /* ---------- FIX DIM OVERLAY (IMPORTANT) ---------- */
-            body > div {
-                opacity: 1 !important;
-            }
-            
-            /* Remove any gray overlay layer */
-            div[style*="opacity"] {
-                opacity: 1 !important;
-            }
-            
-            </style>
-            """, unsafe_allow_html=True)
 
             source_place = st.selectbox("Source",place_names)
             destination_place = st.selectbox("Destination",place_names)
@@ -711,7 +667,8 @@ def order_page():
                     st.stop()
 
         data_ = st.session_state.routes_data or {}
-        paths = data_.get("all_possible_paths", [])
+        paths = [data_.get("all_possible_paths", [])]
+        #st.write("paths:--->",paths)
 
         if not paths:
             st.error("No routes found")
@@ -723,8 +680,18 @@ def order_page():
             mapping = {}
 
             for i, path in enumerate(paths):
-                stops = [leg["sourceName"] for leg in path]
-                stops.append(path[-1]["destinationName"])
+
+                # 🔥 FIX: if path is a dict → convert to list
+                if isinstance(path, dict):
+                    path = [path]
+
+                # safety check
+                if not isinstance(path, list):
+                    st.error(f"Invalid path format: {type(path)}")
+                    st.stop()
+
+                stops = [leg["bus"]["sourceName"] for leg in path]
+                stops.append(path[-1]["bus"]["destinationName"])
 
                 label = f"Route {i+1}: {' ➝ '.join(stops)}"
                 labels.append(label)
@@ -749,11 +716,12 @@ def order_page():
             st.subheader("🛣 Selected Route")
 
             for leg in selected_path:
+                bus = leg["bus"]
                 st.markdown(f"""
                 <div style="background:#e6f2ff;padding:15px;border-radius:10px;margin:10px;border-left:5px solid #1f77b4;">
-                <b>{leg['sourceName']} ➝ {leg['destinationName']}</b><br>
-                🚌 Bus: {leg['oprsNo']}<br>
-                ⏱ {str(leg['serviceStartTime'])[:10]+"  "+str(leg['serviceStartTime'])[11:]} → {leg['serviceEndTime']}
+                <b>{bus['sourceName']} ➝ {bus['destinationName']}</b><br>
+                🚌 Bus: {bus['oprsNo']}<br>
+                ⏱ {str(bus['start_datetime'])} → {str(bus['end_datetime'])}
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -763,14 +731,15 @@ def order_page():
             if st.button("🚚 Confirm Route & Save Path"):
 
                 for leg in selected_path:
+                    bus = leg["bus"]
+
                     row = {
-                        "servicedocid": leg["serviceDocId"],
-                        "sourcename": leg["sourceName"],
-                        "destinationname": leg["destinationName"],
-                        "servicestarttime": leg["serviceStartTime"],
-                        "serviceendtime": leg["serviceEndTime"],
-                        "oprsno": leg["oprsNo"],
-                        "scheduledarrival": leg.get("scheduledArrival"),
+                        "servicedocid": bus["serviceDocId"],
+                        "sourcename": bus["sourceName"],
+                        "destinationname": bus["destinationName"],
+                        "servicestarttime": bus["start_datetime"],
+                        "serviceendtime": bus["end_datetime"],
+                        "oprsno": bus["oprsNo"],
                         "order_id": st.session_state.parcel_id
                     }
 
@@ -1431,6 +1400,11 @@ def track_page():
 
                 for _, row in df_clean.iterrows():
                     status_class = row["status"]
+                    start_time = row["Start Time"]
+                    end_time = row["Scheduled Arrival"]
+
+                    start_str = start_time.strftime('%d %b %H:%M') if pd.notna(start_time) else "N/A"
+                    end_str = end_time.strftime('%d %b %H:%M') if pd.notna(end_time) else "N/A"
 
                     html_ += f"""
                     <div class="step">
@@ -1445,9 +1419,7 @@ def track_page():
                             </div>
 
                             <div class="time">
-                                {row['Start Time'].strftime('%d %b %H:%M')}
-                                →
-                                {row['Scheduled Arrival'].strftime('%d %b %H:%M')}
+                                {start_str} → {end_str}
                             </div>
                         </div>
                     </div>
@@ -1555,32 +1527,6 @@ def login_page():
 
             username = st.text_input("Username")
             password = st.text_input("Password", type="password")
-            st.markdown("""
-                <style>
-                /* Form submit button */
-                div[data-testid="stFormSubmitButton"] button {
-                    background-color: #FFFFFF !important;  /* White background */
-                    color: #000000 !important;            /* Black text */
-                    border: 2px solid #1E5AA8 !important; /* Blue border */
-                    border-radius: 8px;
-                    padding: 8px 20px;
-                    font-weight: 600;
-                }
-            
-                /* Hover effect */
-                div[data-testid="stFormSubmitButton"] button:hover {
-                    background-color: #1E5AA8 !important; /* Blue background */
-                    color: #FFFFFF !important;            /* White text */
-                }
-            
-                /* Click (active) effect */
-                div[data-testid="stFormSubmitButton"] button:active {
-                    background-color: #0D3C84 !important; /* Darker blue */
-                    color: #FFFFFF !important;
-                }
-                </style>
-            """, unsafe_allow_html=True)
-
             submit = st.form_submit_button("Login")
 
             if submit:
