@@ -278,7 +278,7 @@ def style_dataframe(df):
 # -------------------------------
 def order_page():
 
-    url = "https://suryavardhanc8-apsrtc-api.hf.space/route"
+    url = "https://suryavardhanc8-api.hf.space/route"
     # -------------------------------
     # Page Config
     # -------------------------------
@@ -780,7 +780,7 @@ def order_page():
 # -------------------------------
 def scan_page():
 
-    url = "https://suryavardhanc8-apsrtc-api.hf.space/route"
+    url = "https://suryavardhanc8-api.hf.space/route"
 
     # -------------------------------
     # Page Config
