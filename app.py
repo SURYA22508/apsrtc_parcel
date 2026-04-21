@@ -20,6 +20,9 @@ from barcode.writer import ImageWriter
 
 from dotenv import load_dotenv 
 import os
+from zoneinfo import ZoneInfo
+
+
 
 load_dotenv()
 # -------------------------------
@@ -650,7 +653,7 @@ def order_page():
         # API CALL (ONLY ONCE)
         if st.session_state.routes_data is None:
             with st.spinner("Loading routes..."):
-                now = datetime.now()
+                now = datetime.now(ZoneInfo("Asia/Kolkata"))
                 st.write(now.hour)
                 st.write(now.minute)
                 try:
