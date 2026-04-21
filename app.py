@@ -651,6 +651,8 @@ def order_page():
         if st.session_state.routes_data is None:
             with st.spinner("Loading routes..."):
                 now = datetime.now()
+                st.write(now.hour)
+                st.write(now.minute)
                 try:
                     response = requests.get(
                         url,
